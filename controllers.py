@@ -4,7 +4,7 @@
 import math
 
 
-def SaturationFunction(original_val, lower_bound, upper_bound):
+def saturation_function(original_val, lower_bound, upper_bound):
     if lower_bound > upper_bound:
         raise Exception("the lower bound must below the upper bound")
     if original_val <= lower_bound:
@@ -56,7 +56,7 @@ class PID_ControllerBasic(object):
             if math.fabs(self.error_val) <= self.integration_threshold:
                 self.integrated_error_val += (error_previous + self.error_val)*self.sample_time/2.0
                 if self.integration_saturation_flg:
-                    self.integrated_error_val = SaturationFunction(self.integrated_error_val,
+                    self.integrated_error_val = saturation_function(self.integrated_error_val,
                                                                    self.integration_saturation_lower_bound,
                                                                    self.integration_saturation_upper_bound)
         i_term = self.ki * self.integrated_error_val
